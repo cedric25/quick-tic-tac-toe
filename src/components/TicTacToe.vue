@@ -7,8 +7,8 @@
         <button
           type="button"
           v-for="(cell, cellIndex) in row"
-          class="flex w-full flex-1 justify-center border py-10 hover:bg-gray-100"
-          :class="disableAll ? 'bg-amber-50 hover:bg-amber-50' : ''"
+          class="flex w-full flex-1 justify-center border py-10 text-2xl font-light hover:bg-gray-100"
+          :class="disableAll ? 'bg-amber-50 hover:!bg-amber-50' : ''"
           :disabled="cell !== null || disableAll"
           @click="play(rowIndex, cellIndex)"
         >
@@ -20,14 +20,14 @@
         class="absolute left-7 h-px w-[90%] origin-left scale-0 bg-gray-400"
         :class="{
           'scale-100 transition duration-700 ease-in-out': startDrawingLine,
-          'top-[54px]': winResult === 'h-top',
-          'top-[160px]': winResult === 'h-center',
-          'top-[266px]': winResult === 'h-bottom',
-          'left-[96px] top-7 w-[262px] rotate-90': winResult === 'v-left',
-          'left-[287px] top-7 w-[262px] rotate-90': winResult === 'v-center',
-          'left-[478.5px] top-7 w-[262px] rotate-90': winResult === 'v-right',
-          'left-[50px] top-7 w-[540px] rotate-[29deg]': winResult === 'diag-down',
-          'left-[50px] top-[291px] w-[540px] rotate-[-29deg]': winResult === 'diag-up',
+          'top-[59px]': winResult === 'h-top',
+          'top-[173px]': winResult === 'h-center',
+          'top-[287px]': winResult === 'h-bottom',
+          'left-[96px] top-7 w-[290px] rotate-90': winResult === 'v-left',
+          'left-[287px] top-7 w-[290px] rotate-90': winResult === 'v-center',
+          'left-[478.5px] top-7 w-[290px] rotate-90': winResult === 'v-right',
+          'left-[46px] top-7 w-[545px] rotate-[31deg]': winResult === 'diag-down',
+          'left-[50px] top-[314px] w-[550px] rotate-[-30.6deg]': winResult === 'diag-up',
         }"
       ></div>
     </div>
