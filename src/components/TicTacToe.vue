@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col gap-y-4 text-center">
-    <div>Playing: {{ currentPlayer }}</div>
+  <div class="flex flex-col gap-y-8 text-center">
+    <div class="text-xl">Playing: {{ currentPlayer }}</div>
 
     <div class="relative mx-auto flex h-full w-full max-w-xl border">
       <div v-for="(row, rowIndex) in gameToDisplay" class="flex w-full flex-col items-center">
@@ -32,11 +32,11 @@
       ></div>
     </div>
 
-    <div>
-      {{ message }}
+    <div class="text-xl">
+      {{ endMessage }}
     </div>
 
-    <div class="mt-4">
+    <div class="mt-2">
       <button
         type="button"
         class="rounded border border-cyan-200 px-4 py-2 transition hover:scale-[1.05] hover:bg-cyan-100"
@@ -56,7 +56,7 @@ import { isWin } from '../models/ticTacToe.models.js'
 let game = reactive(Array(9).fill(null))
 
 const currentPlayer = ref('x')
-const message = ref('')
+const endMessage = ref('')
 const disableAll = ref(false)
 const startDrawingLine = ref(false)
 const winResult = ref('')
@@ -73,7 +73,7 @@ function play(cellIndex) {
 function restart() {
   startDrawingLine.value = false
   Object.assign(game, Array(9).fill(null))
-  message.value = ''
+  endMessage.value = ''
   disableAll.value = false
   currentPlayer.value = 'x'
 }
@@ -83,10 +83,10 @@ watch(
   newGame => {
     winResult.value = isWin(newGame)
     if (winResult.value) {
-      message.value = `There is a winner! ${currentPlayer.value === 'x' ? 'o' : 'x'}`
+      endMessage.value = `There is a winner! ${currentPlayer.value === 'x' ? 'o' : 'x'}`
       endOfGame()
-    } else if (newGame.flat().every(cell => cell !== null)) {
-      message.value = 'Game over!'
+    } else if (newGame.every(cell => cell !== null)) {
+      endMessage.value = 'Game over!'
       endOfGame()
     }
   },
