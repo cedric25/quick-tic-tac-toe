@@ -3,14 +3,14 @@
     <div>Playing: {{ currentPlayer }}</div>
 
     <div class="relative mx-auto flex h-full w-full max-w-xl border">
-      <div v-for="(row, rowIndex) in game" class="flex w-full flex-col items-center">
+      <div v-for="(row, rowIndex) in gameToDisplay" class="flex w-full flex-col items-center">
         <button
           type="button"
           v-for="(cell, cellIndex) in row"
           class="flex w-full flex-1 justify-center border py-10 text-2xl font-light hover:bg-gray-100"
           :class="disableAll ? 'bg-amber-50 hover:!bg-amber-50' : ''"
           :disabled="cell !== null || disableAll"
-          @click="play(rowIndex, cellIndex)"
+          @click="play(rowIndex * 3 + cellIndex)"
         >
           {{ cell ?? '&nbsp;' }}
         </button>
@@ -50,14 +50,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import { isWin } from '../models/ticTacToe.models.js'
 
-let game = reactive([
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-])
+let game = reactive(Array(9).fill(null))
 
 const currentPlayer = ref('x')
 const message = ref('')
@@ -65,18 +61,18 @@ const disableAll = ref(false)
 const startDrawingLine = ref(false)
 const winResult = ref('')
 
-function play(row, col) {
-  game[row][col] = currentPlayer.value
+const gameToDisplay = computed(() => {
+  return [game.slice(0, 3), game.slice(3, 6), game.slice(6, 9)]
+})
+
+function play(cellIndex) {
+  game[cellIndex] = currentPlayer.value
   currentPlayer.value = currentPlayer.value === 'x' ? 'o' : 'x'
 }
 
 function restart() {
   startDrawingLine.value = false
-  Object.assign(game, [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ])
+  Object.assign(game, Array(9).fill(null))
   message.value = ''
   disableAll.value = false
   currentPlayer.value = 'x'
