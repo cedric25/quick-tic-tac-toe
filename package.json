@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettier": "prettier src --check",
+    "prettier:fix": "prettier src --write",
+    "eslint": "eslint \"src/**/*.{vue,js,ts}\"",
+    "eslint:fix": "eslint \"src/**/*.{vue,js,ts}\" --fix"
   },
   "dependencies": {
     "vue": "^3.2.47"
@@ -14,6 +18,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
     "autoprefixer": "^10.4.14",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-vue": "^9.12.0",
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",

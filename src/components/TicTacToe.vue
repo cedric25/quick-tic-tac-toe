@@ -5,10 +5,15 @@
     </div>
 
     <div class="relative mx-auto flex h-full w-full max-w-lg border">
-      <div v-for="(row, rowIndex) in gameToDisplay" class="flex w-full flex-col items-center">
+      <div
+        v-for="(row, rowIndex) in gameToDisplay"
+        :key="rowIndex"
+        class="flex w-full flex-col items-center"
+      >
         <button
-          type="button"
           v-for="(cell, cellIndex) in row"
+          :key="cellIndex"
+          type="button"
           class="flex aspect-square w-full items-center justify-center border text-2xl font-light transition-colors hover:bg-gray-100"
           :class="disableAll ? 'bg-amber-50 hover:!bg-amber-50' : ''"
           :disabled="cell !== null || disableAll"
