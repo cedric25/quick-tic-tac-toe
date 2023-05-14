@@ -24,15 +24,15 @@
       </div>
 
       <div
-        class="absolute h-px w-[90%] origin-left scale-0 bg-gray-400"
+        class="absolute h-px origin-left scale-0 bg-gray-400"
         :class="{
           'scale-100 transition duration-700 ease-in-out': startDrawingLine,
-          'left-[5%] top-[calc(50%-33%+1px)]': winResult === 'h-top',
-          'left-[5%] top-[calc(50%+2px)]': winResult === 'h-center',
-          'left-[5%] top-[calc(50%+33%+3px)]': winResult === 'h-bottom',
-          'left-[calc(50%-33%-1px)] top-[5%] rotate-90': winResult === 'v-left',
-          'left-[50%] top-[5%] rotate-90': winResult === 'v-center',
-          'left-[calc(50%+33%+1px)] top-[5%] rotate-90': winResult === 'v-right',
+          'left-[5%] top-[calc(50%-33%+1px)] w-[90%]': winResult === 'h-top',
+          'left-[5%] top-[calc(50%+2px)] w-[90%]': winResult === 'h-center',
+          'left-[5%] top-[calc(50%+33%+3px)] w-[90%]': winResult === 'h-bottom',
+          'left-[calc(50%-33%-1px)] top-[5%] w-[90%] rotate-90': winResult === 'v-left',
+          'left-[50%] top-[5%] w-[90%] rotate-90': winResult === 'v-center',
+          'left-[calc(50%+33%+1px)] top-[5%] w-[90%] rotate-90': winResult === 'v-right',
           'left-[10%] top-[10%] w-[115%] rotate-[45deg]': winResult === 'diag-down',
           'left-[10%] top-[90%] w-[115%] -rotate-[45deg]': winResult === 'diag-up',
         }"
