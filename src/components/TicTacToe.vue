@@ -1,33 +1,35 @@
 <template>
-  <div class="flex flex-col gap-y-8 text-center">
-    <div class="text-xl">Playing: {{ currentPlayer }}</div>
+  <div class="flex flex-col gap-y-8 px-10 text-center">
+    <div class="text-xl">
+      Playing: <span class="pl-3 text-4xl font-light">{{ currentPlayer }}</span>
+    </div>
 
-    <div class="relative mx-auto flex h-full w-full max-w-xl border">
+    <div class="relative mx-auto flex h-full w-full max-w-lg border">
       <div v-for="(row, rowIndex) in gameToDisplay" class="flex w-full flex-col items-center">
         <button
           type="button"
           v-for="(cell, cellIndex) in row"
-          class="flex w-full flex-1 justify-center border py-10 text-2xl font-light hover:bg-gray-100"
+          class="flex aspect-square w-full items-center justify-center border text-2xl font-light transition-colors hover:bg-gray-100"
           :class="disableAll ? 'bg-amber-50 hover:!bg-amber-50' : ''"
           :disabled="cell !== null || disableAll"
           @click="play(rowIndex * 3 + cellIndex)"
         >
-          {{ cell ?? '&nbsp;' }}
+          {{ cell }}
         </button>
       </div>
 
       <div
-        class="absolute left-7 h-px w-[90%] origin-left scale-0 bg-gray-400"
+        class="absolute h-px w-[90%] origin-left scale-0 bg-gray-400"
         :class="{
           'scale-100 transition duration-700 ease-in-out': startDrawingLine,
-          'top-[59px]': winResult === 'h-top',
-          'top-[173px]': winResult === 'h-center',
-          'top-[287px]': winResult === 'h-bottom',
-          'left-[96px] top-7 w-[290px] rotate-90': winResult === 'v-left',
-          'left-[287px] top-7 w-[290px] rotate-90': winResult === 'v-center',
-          'left-[478.5px] top-7 w-[290px] rotate-90': winResult === 'v-right',
-          'left-[46px] top-7 w-[545px] rotate-[31deg]': winResult === 'diag-down',
-          'left-[50px] top-[314px] w-[550px] rotate-[-30.6deg]': winResult === 'diag-up',
+          'left-[5%] top-[calc(50%-33%+1px)]': winResult === 'h-top',
+          'left-[5%] top-[calc(50%+2px)]': winResult === 'h-center',
+          'left-[5%] top-[calc(50%+33%+3px)]': winResult === 'h-bottom',
+          'left-[calc(50%-33%-1px)] top-[5%] rotate-90': winResult === 'v-left',
+          'left-[50%] top-[5%] rotate-90': winResult === 'v-center',
+          'left-[calc(50%+33%+1px)] top-[5%] rotate-90': winResult === 'v-right',
+          'left-[10%] top-[10%] w-[115%] rotate-[45deg]': winResult === 'diag-down',
+          'left-[10%] top-[90%] w-[115%] -rotate-[45deg]': winResult === 'diag-up',
         }"
       ></div>
     </div>
@@ -53,7 +55,7 @@
 import { ref, reactive, computed, watch } from 'vue'
 import { isWin } from '../models/ticTacToe.models.js'
 
-let game = reactive(Array(9).fill(null))
+const game = reactive(Array(9).fill(null))
 
 const currentPlayer = ref('x')
 const endMessage = ref('')
@@ -95,9 +97,11 @@ watch(
 
 function endOfGame() {
   disableAll.value = true
-  setTimeout(() => {
-    startDrawingLine.value = true
-  })
+  if (winResult.value) {
+    setTimeout(() => {
+      startDrawingLine.value = true
+    })
+  }
   currentPlayer.value = '-'
 }
 </script>
