@@ -17,3 +17,7 @@ pnpm install
 ```
 pnpm dev
 ```
+
+## Misc
+
+Fav icon from [flaticon.com](https://www.flaticon.com/free-icon/tic-tac-toe_9267851?term=tic+tac+toe&page=1&position=9&origin=tag&related_id=9267851)
