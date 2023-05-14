@@ -14,7 +14,7 @@
           v-for="(cell, cellIndex) in row"
           :key="cellIndex"
           type="button"
-          class="flex aspect-square w-full items-center justify-center border text-2xl font-light transition-colors hover:bg-gray-100"
+          class="flex aspect-square w-full items-center justify-center border text-5xl font-extralight transition-colors hover:bg-gray-100"
           :class="disableAll ? 'bg-amber-50 hover:!bg-amber-50' : ''"
           :disabled="cell !== null || disableAll"
           @click="play(rowIndex * 3 + cellIndex)"
@@ -27,14 +27,14 @@
         class="absolute h-px origin-left scale-0 bg-gray-400"
         :class="{
           'scale-100 transition duration-700 ease-in-out': startDrawingLine,
-          'left-[5%] top-[calc(50%-33%+1px)] w-[90%]': winResult === 'h-top',
-          'left-[5%] top-[calc(50%+2px)] w-[90%]': winResult === 'h-center',
-          'left-[5%] top-[calc(50%+33%+3px)] w-[90%]': winResult === 'h-bottom',
+          'left-[5%] top-[calc(50%-33%+3px)] w-[90%]': winResult === 'h-top',
+          'left-[5%] top-[calc(50%+5px)] w-[90%]': winResult === 'h-center',
+          'left-[5%] top-[calc(50%+33%+6px)] w-[90%]': winResult === 'h-bottom',
           'left-[calc(50%-33%-1px)] top-[5%] w-[90%] rotate-90': winResult === 'v-left',
           'left-[50%] top-[5%] w-[90%] rotate-90': winResult === 'v-center',
           'left-[calc(50%+33%+1px)] top-[5%] w-[90%] rotate-90': winResult === 'v-right',
-          'left-[10%] top-[10%] w-[115%] rotate-[45deg]': winResult === 'diag-down',
-          'left-[10%] top-[90%] w-[115%] -rotate-[45deg]': winResult === 'diag-up',
+          'left-[10%] top-[calc(10%+3px)] w-[115%] rotate-[45deg]': winResult === 'diag-down',
+          'left-[10%] top-[calc(90%+5px)] w-[115%] -rotate-[45deg]': winResult === 'diag-up',
         }"
       ></div>
     </div>
